@@ -1,5 +1,0 @@
-文件: C:\Users\12892\Desktop\java\3122004414\src\main\resources\orig_0.8_add.txt 相似度: 0.96
-文件: C:\Users\12892\Desktop\java\3122004414\src\main\resources\orig_0.8_del.txt 相似度: 0.83
-文件: C:\Users\12892\Desktop\java\3122004414\src\main\resources\orig_0.8_dis_1.txt 相似度: 0.82
-文件: C:\Users\12892\Desktop\java\3122004414\src\main\resources\orig_0.8_dis_10.txt 相似度: 0.89
-文件: C:\Users\12892\Desktop\java\3122004414\src\main\resources\orig_0.8_dis_15.txt 相似度: 0.91
