@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <dependency>
+      <groupId>org.ansj</groupId>
+      <artifactId>ansj_seg</artifactId>
+      <version>5.1.1</version>
+    </dependency>
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/nlp-lang-1.7.9.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/ansj_seg-5.1.6.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES />
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/../ansj_seg-master.zip!/ansj_seg-master/plugin/ansj_lucene3_plugin/src/main/java" />
+          <root url="jar://$MODULE_DIR$/../ansj_seg-master.zip!/ansj_seg-master/plugin/ansj_lucene3_plugin/src/test/java" />
+          <root url="jar://$MODULE_DIR$/../ansj_seg-master.zip!/ansj_seg-master/plugin/ansj_lucene4_plugin/src/main/java" />
+          <root url="jar://$MODULE_DIR$/../ansj_seg-master.zip!/ansj_seg-master/plugin/ansj_lucene4_plugin/src/test/java" />
+          <root url="jar://$MODULE_DIR$/../ansj_seg-master.zip!/ansj_seg-master/plugin/ansj_lucene5_plugin/src/main/java" />
+          <root url="jar://$MODULE_DIR$/../ansj_seg-master.zip!/ansj_seg-master/plugin/ansj_lucene5_plugin/src/test/java" />
+          <root url="jar://$MODULE_DIR$/../ansj_seg-master.zip!/ansj_seg-master/plugin/ansj_lucene6_plugin/src/main/java" />
+          <root url="jar://$MODULE_DIR$/../ansj_seg-master.zip!/ansj_seg-master/plugin/ansj_lucene6_plugin/src/test/java" />
+          <root url="jar://$MODULE_DIR$/../ansj_seg-master.zip!/ansj_seg-master/plugin/ansj_lucene7_plugin/src/main/java" />
+          <root url="jar://$MODULE_DIR$/../ansj_seg-master.zip!/ansj_seg-master/plugin/ansj_lucene7_plugin/src/test/java" />
+          <root url="jar://$MODULE_DIR$/../ansj_seg-master.zip!/ansj_seg-master/plugin/ansj_lucene9_plugin/src/main/java" />
+          <root url="jar://$MODULE_DIR$/../ansj_seg-master.zip!/ansj_seg-master/plugin/ansj_lucene9_plugin/src/test/java" />
+          <root url="jar://$MODULE_DIR$/../ansj_seg-master.zip!/ansj_seg-master/plugin/ansj_solr4_plugin/src/main/java" />
+          <root url="jar://$MODULE_DIR$/../ansj_seg-master.zip!/ansj_seg-master/plugin/ansj_solr6_plugin/src/main/java" />
+          <root url="jar://$MODULE_DIR$/../ansj_seg-master.zip!/ansj_seg-master/src/main/java" />
+          <root url="jar://$MODULE_DIR$/../ansj_seg-master.zip!/ansj_seg-master/src/test/java" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+  </component>
+</module>
