@@ -1,0 +1,5 @@
+文件: C:\Users\12892\Desktop\java\papertest\orig_0.8_add.txt 相似度: 0.9609375
+文件: C:\Users\12892\Desktop\java\papertest\orig_0.8_del.txt 相似度: 0.828125
+文件: C:\Users\12892\Desktop\java\papertest\orig_0.8_dis_1.txt 相似度: 0.8203125
+文件: C:\Users\12892\Desktop\java\papertest\orig_0.8_dis_10.txt 相似度: 0.890625
+文件: C:\Users\12892\Desktop\java\papertest\orig_0.8_dis_15.txt 相似度: 0.90625
