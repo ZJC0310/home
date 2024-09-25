@@ -16,36 +16,65 @@ public class Equation {
         this.result = calculatePostfix(this.postfixExpression);
     }
 
-    // 随机生成表达式的构造函数
     public Equation(int numSymbols, int max) {
         StringBuilder expression = new StringBuilder();
         Random random = new Random();
 
-        int firstNumber = random.nextInt(max) + 1; // 第一个数值
-        expression.append(firstNumber); // 加入第一个数值
+        // 生成第一个数字
+        int firstNumber = random.nextInt(max) + 1;
+        expression.append(firstNumber);
+        int currentSymbols = 0; // 当前运算符数量
 
-        // 随机生成后续的运算符和数值
         for (int i = 0; i < numSymbols; i++) {
             String symbol = SYMBOLS[random.nextInt(SYMBOLS.length)];
-            int nextNumber = random.nextInt(max) + 1; // 生成下一个数值
+            int nextNumber = random.nextInt(max) + 1;
 
             // 确保不会导致负数
-            if (symbol.equals("-")) {
-                // 检查前一个数是否大于下一个数，避免负数
-                if (firstNumber < nextNumber) {
-                    // 若当前数小于下一个数，则不使用减法
-                    continue;
-                }
+            if (symbol.equals("-") && firstNumber < nextNumber) {
+                continue;
             }
 
-            expression.append(" ").append(symbol).append(" ").append(nextNumber);
-            firstNumber = calculateIntermediateResult(firstNumber, symbol, nextNumber); // 更新当前数值
+            // 检查是否需要添加括号
+            if (currentSymbols < 3 && (currentSymbols > 0 || random.nextBoolean())) { // 随机决定是否加括号
+                StringBuilder subExpression = new StringBuilder();
+                int subFirstNumber = random.nextInt(max) + 1;
+                subExpression.append(subFirstNumber);
+                int subSymbols = random.nextInt(2) + 1; // 子表达式至少有一个运算符
+                int subOperatorsCount = 0; // 统计子表达式的运算符数量
+
+                for (int j = 0; j < subSymbols; j++) {
+                    String subSymbol = SYMBOLS[random.nextInt(SYMBOLS.length)];
+                    int subNextNumber = random.nextInt(max) + 1;
+
+                    // 确保不会导致负数
+                    if (subSymbol.equals("-") && subFirstNumber < subNextNumber) {
+                        continue;
+                    }
+
+                    subExpression.append(" ").append(subSymbol).append(" ").append(subNextNumber);
+                    subFirstNumber = calculateIntermediateResult(subFirstNumber, subSymbol, subNextNumber);
+                    subOperatorsCount++; // 增加子表达式运算符数量
+                }
+
+                // 仅在当前运算符加上子表达式运算符数量不超过3时才添加括号
+                if (currentSymbols + subOperatorsCount < 4) {
+                    expression.append(" ").append(symbol).append(" (").append(subExpression.toString()).append(")");
+                    currentSymbols += subOperatorsCount + 1; // 更新当前运算符数量
+                }
+            } else {
+                expression.append(" ").append(symbol).append(" ").append(nextNumber);
+                currentSymbols++; // 增加当前运算符数量
+            }
+
+            // 更新当前数字
+            firstNumber = calculateIntermediateResult(firstNumber, symbol, nextNumber);
         }
 
-        this.infixExpression = expression.toString();
+        this.infixExpression = expression.toString().trim();
         this.postfixExpression = infixToPostfix(this.infixExpression);
         this.result = calculatePostfix(this.postfixExpression);
     }
+
     private int calculateIntermediateResult(int a, String operator, int b) {
         switch (operator) {
             case "+":
@@ -60,8 +89,6 @@ public class Equation {
                 return a;
         }
     }
-
-
 
     public String getInfixExpression() {
         return infixExpression;
@@ -128,7 +155,7 @@ public class Equation {
         Stack<Fraction> stack = new Stack<>();
 
         for (String token : tokens) {
-            if (!isSymbol(token) && !token.isEmpty()) {
+            if (!isSymbol(token) && !token.isEmpty() && !token.equals("(") && !token.equals(")")) {
                 stack.push(new Fraction(token));
             } else if (isSymbol(token)) {
                 if (stack.size() < 2) {

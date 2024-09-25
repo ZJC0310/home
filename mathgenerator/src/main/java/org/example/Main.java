@@ -71,7 +71,7 @@ public class Main {
             Equation equation = new Equation(numSymbol, max); // 生成表达式
 
             // 检查表达式是否有效
-            if (!isValidEquation(equation)) continue;
+            if (!isValidEquation(equation) || !isValidOperatorCount(equation) || !hasValidParentheses(equation)) continue;
 
             String result = equation.getResult().toString();
             if (!resultSet.isEmpty() && resultSet.contains(result))
@@ -89,7 +89,21 @@ public class Main {
         // 检查结果是否相等于表达式
         if (equation.getResult().toString().equals("0")) return false; // 不允许结果为0
         if (equation.getInfixExpression().matches(".*\\d=\\d.*")) return false; // 不允许形如"9=9"
-        return true;
+        // 检查是否至少有一个运算符
+        String infix = equation.getInfixExpression();
+        int operatorCount = infix.split("[+\\-×÷]").length - 1; // 计算运算符数量
+        return operatorCount > 0; // 确保至少有一个运算符
+    }
+
+    private static boolean isValidOperatorCount(Equation equation) {
+        String infix = equation.getInfixExpression();
+        int operatorCount = infix.split("[+\\-×÷]").length - 1; // 计算运算符数量
+        return operatorCount <= 3; // 确保总运算符数量不超过3
+    }
+
+    private static boolean hasValidParentheses(Equation equation) {
+        String infix = equation.getInfixExpression();
+        return !infix.contains("( )") && infix.split("\\(").length - 1 <= 1; // 检查括号内是否有内容
     }
 
     private static void judge(String exercises, String answers) throws IOException {
@@ -103,10 +117,15 @@ public class Main {
         boolean[] tag = new boolean[exerciseList.size()]; // 标记答案是否正确
         int num = 0; // 标记正确答案个数
         for (int i = 0; i < exerciseList.size(); i++) {
-            Equation equation = new Equation(exerciseList.get(i));
-            if (equation.getResult().toString().equals(answerList.get(i))) {
-                tag[i] = true;
-                num++; // 记录正确的答案个数
+            System.out.println("Processing expression: " + exerciseList.get(i)); // 打印表达式
+            try {
+                Equation equation = new Equation(exerciseList.get(i));
+                if (equation.getResult().toString().equals(answerList.get(i))) {
+                    tag[i] = true;
+                    num++; // 记录正确的答案个数
+                }
+            } catch (NumberFormatException e) {
+                System.err.println("Error processing expression: " + exerciseList.get(i) + " - " + e.getMessage());
             }
         }
         StringBuilder correct = new StringBuilder("Correct:" + num + "(");
