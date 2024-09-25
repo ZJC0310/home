@@ -21,17 +21,47 @@ public class Equation {
         StringBuilder expression = new StringBuilder();
         Random random = new Random();
 
-        // 随机生成数值和符号
+        int firstNumber = random.nextInt(max) + 1; // 第一个数值
+        expression.append(firstNumber); // 加入第一个数值
+
+        // 随机生成后续的运算符和数值
         for (int i = 0; i < numSymbols; i++) {
-            if (i > 0) {
-                expression.append(SYMBOLS[random.nextInt(SYMBOLS.length)]).append(" ");
+            String symbol = SYMBOLS[random.nextInt(SYMBOLS.length)];
+            int nextNumber = random.nextInt(max) + 1; // 生成下一个数值
+
+            // 确保不会导致负数
+            if (symbol.equals("-")) {
+                // 检查前一个数是否大于下一个数，避免负数
+                if (firstNumber < nextNumber) {
+                    // 若当前数小于下一个数，则不使用减法
+                    continue;
+                }
             }
-            expression.append(random.nextInt(max) + 1); // 生成 1 到 max 的随机数
+
+            expression.append(" ").append(symbol).append(" ").append(nextNumber);
+            firstNumber = calculateIntermediateResult(firstNumber, symbol, nextNumber); // 更新当前数值
         }
-        this.infixExpression = expression.toString().trim(); // 去除多余空格
+
+        this.infixExpression = expression.toString();
         this.postfixExpression = infixToPostfix(this.infixExpression);
         this.result = calculatePostfix(this.postfixExpression);
     }
+    private int calculateIntermediateResult(int a, String operator, int b) {
+        switch (operator) {
+            case "+":
+                return a + b;
+            case "-":
+                return a - b;
+            case "×":
+                return a * b;
+            case "÷":
+                return a / b; // 假设除数不为0
+            default:
+                return a;
+        }
+    }
+
+
 
     public String getInfixExpression() {
         return infixExpression;

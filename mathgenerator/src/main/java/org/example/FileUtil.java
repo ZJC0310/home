@@ -17,6 +17,10 @@ public class FileUtil {
             throw new IOException("写入文件失败");
         }
     }
+    public static void ClearFile(String path) throws IOException {
+        FileWriter fw = new FileWriter(path, false); // false 参数表示清空文件
+        fw.close();
+    }
 
     public static void ReadFile(String path, List<String> list) {
         File file = new File(path);

@@ -1,4 +1,5 @@
 package org.example;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -63,9 +64,15 @@ public class Main {
 
     private static void generate(int num, int max) throws IOException {
         int i = 0;
+        FileUtil.ClearFile(exercisesFilePath);
+        FileUtil.ClearFile(answersFilePath);
         while (i < num) {
             int numSymbol = (int) (Math.random() * 3 + 1); // 随机生成1-3个运算符
             Equation equation = new Equation(numSymbol, max); // 生成表达式
+
+            // 检查表达式是否有效
+            if (!isValidEquation(equation)) continue;
+
             String result = equation.getResult().toString();
             if (!resultSet.isEmpty() && resultSet.contains(result))
                 continue;
@@ -76,6 +83,13 @@ public class Main {
             FileUtil.WriteFile(answersFilePath, result); // 写入答案
             i++;
         }
+    }
+
+    private static boolean isValidEquation(Equation equation) {
+        // 检查结果是否相等于表达式
+        if (equation.getResult().toString().equals("0")) return false; // 不允许结果为0
+        if (equation.getInfixExpression().matches(".*\\d=\\d.*")) return false; // 不允许形如"9=9"
+        return true;
     }
 
     private static void judge(String exercises, String answers) throws IOException {
