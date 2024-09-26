@@ -100,7 +100,6 @@ public class Equation_p_c {
         StringBuilder result = new StringBuilder();
         Stack<String> stack = new Stack<>();
         String[] tokens = infixExpression.split("(?=[-+×÷()])|(?<=[-+×÷()])");
-
         for (String token : tokens) {
             if (!isSymbol(token) && !token.equals("(") && !token.equals(")") && !token.isEmpty()) {
                 result.append(token).append(" ");

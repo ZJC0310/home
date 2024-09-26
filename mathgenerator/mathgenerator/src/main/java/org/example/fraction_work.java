@@ -38,7 +38,7 @@ public class fraction_work {
     //生成真分数
     public static fraction_work fraction_random(int max){//随机生成真分数或者自然数
         int p=(int)(Math.random()*100)+1;
-        if(p<=70){//70%的概率生成整数
+        if(p<=15){//15%的概率生成整数，因为自然数太多了
             int numerator=(int)(Math.random()*max);
             if(numerator==0)
                 numerator=1;//防止生成0
