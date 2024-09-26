@@ -29,6 +29,7 @@ public class FileWorkTest {
         assertEquals("HelloWorld", lines.get(0)); // 验证写入内容去掉空格
     }
 
+
     @Test
     public void testClearFile() throws IOException {
         file_work.WriteFile(TEST_FILE_PATH, "Test Content");

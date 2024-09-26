@@ -19,25 +19,25 @@ public class Main {
         }
     }
     public static void run(String[] args) throws IOException {
-        int num = 0;
+        int number = 0;
         int max = 0;
-        String exerciseFile = null;
-        String answerFile = null;
+        String exercises_file = null;
+        String answer_file = null;
         for (int i = 0; i < args.length; i++) {
             if (args[i].equals("-e")) {
                 if (i + 1 < args.length) {
-                    exerciseFile = args[i + 1];
+                    exercises_file = args[i + 1];
                 }
             }
             if (args[i].equals("-a")) {
                 if (i + 1 < args.length) {
-                    answerFile = args[i + 1];
+                    answer_file = args[i + 1];
                 }
             }
             if (args[i].equals("-n")) {
                 if (i + 1 < args.length) {
-                    num = Integer.parseInt(args[i + 1]);
-                    if (num <= 0) throw new RuntimeException("请求的表达式数量过少");
+                    number = Integer.parseInt(args[i + 1]);
+                    if (number <= 0) throw new RuntimeException("请求的表达式数量过少");
                 }
             }
             if (args[i].equals("-r")) {
@@ -46,14 +46,12 @@ public class Main {
                     if (max <= 0) throw new RuntimeException("操作数范围设置小于零");
                 }
             }
-
         }
-
-        if (num != 0 && max == 0) max = 10; // 只要求生成题目时，最大范围为10
-        if (num == 0 && max != 0) num = 10; // 只要求题目范围时，则生成10道题目
-        if (num != 0 && max != 0) generate(num, max);//生成
-        if (exerciseFile != null && answerFile != null) judge(exerciseFile, answerFile);//判断
-        if (num == 0 && max == 0 && exerciseFile == null && answerFile == null)
+        if (number != 0 && max == 0) max = 10; // 只要求生成题目时，最大范围为10
+        if (number == 0 && max != 0) number = 10; // 只要求题目范围时，则生成10道题目
+        if (number != 0 && max != 0) generate(number, max);//生成表达式
+        if (exercises_file != null && answer_file != null) judge(exercises_file, answer_file);//判断答案
+        if (number == 0 && max == 0 && exercises_file == null && answer_file == null)
             throw new RuntimeException("输入的参数格式不符合题目要求");
     }
 
@@ -134,9 +132,11 @@ public class Main {
                     .toArray(String[]::new);
             if (repeat_equantion.length!=equantion_now.length) return false;
             for (int q=0;q<equantion_now.length;q++){
+                int biaozhi=0;
                 for (int p=0;p<repeat_equantion.length;p++){
-                    if (!equantion_now[q].equals(repeat_equantion[p])) return false;
+                    if (!equantion_now[q].equals(repeat_equantion[p])) biaozhi++;
                 }
+                if(biaozhi==equantion_now.length) return false;
             }
             lnr.close();
         } catch (FileNotFoundException e) {
